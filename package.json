@@ -9,7 +9,7 @@
   "scripts": {
     "prebuild": "npm install --prefer-offline --no-audit --no-fund",
     "dev": "vite",
-    "build": "tsc -b && vite build && copy public\\_redirects dist\\_redirects 2>nul || cp public/_redirects dist/_redirects 2>/dev/null || echo 'Redirects file copied'",
+    "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
