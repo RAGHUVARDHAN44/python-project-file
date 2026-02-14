@@ -10,10 +10,18 @@
     "prebuild": "npm install --prefer-offline --no-audit --no-fund",
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:android": "npm run build && npx cap copy android && npx cap open android",
+    "sync:android": "npx cap sync android",
+    "add:android": "npx cap add android",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@capacitor/android": "^8.1.0",
+    "@capacitor/camera": "^8.0.1",
+    "@capacitor/cli": "^8.1.0",
+    "@capacitor/core": "^8.1.0",
+    "@capacitor/filesystem": "^8.1.2",
     "@types/uuid": "^10.0.0",
     "chart.js": "^4.5.1",
     "clsx": "^2.1.1",
@@ -32,7 +40,6 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
-
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",

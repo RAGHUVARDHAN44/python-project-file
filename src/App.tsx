@@ -1,13 +1,16 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
+import MobileLayout from './components/mobile/MobileLayout';
 import SchoolBackground from './components/SchoolBackground';
 import Home from './pages/Home';
 import Attendance from './pages/Attendance';
+import MobileAttendance from './pages/MobileAttendance';
 import Records from './pages/Records';
 import Analytics from './pages/Analytics';
 
 import { smsService } from './services/sms';
+import { isMobile } from './utils/mobile';
 
 function App() {
   useEffect(() => {
@@ -33,14 +36,25 @@ function App() {
   return (
     <BrowserRouter>
       <SchoolBackground />
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="attendance" element={<Attendance />} />
-          <Route path="records" element={<Records />} />
-          <Route path="analytics" element={<Analytics />} />
-        </Route>
-      </Routes>
+      {isMobile() ? (
+        <MobileLayout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="attendance" element={<MobileAttendance />} />
+            <Route path="records" element={<Records />} />
+            <Route path="analytics" element={<Analytics />} />
+          </Routes>
+        </MobileLayout>
+      ) : (
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="attendance" element={<Attendance />} />
+            <Route path="records" element={<Records />} />
+            <Route path="analytics" element={<Analytics />} />
+          </Route>
+        </Routes>
+      )}
     </BrowserRouter>
   );
 }
